@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Install dependencies
+      - name: Run Playwright tests
         run: npm run automation
       - uses: actions/upload-artifact@v3
         if: always()

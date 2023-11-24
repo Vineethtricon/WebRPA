@@ -10,7 +10,7 @@ const apiMethods = new uiCommonUtils.apiBaseClass.APIBaseClass()
 2. Navigate to Menu "Industries", "Solution", "Difference"
 3. Validate the Page title 
 */
-test.only('Demo Method for Tricon Module', async ({ request, page }) => {
+test('Demo Method for Tricon Module', async ({ request, page }) => {
     const URL = "https://postman-echo.com/post"
     const payload = "triconWebSiteHomeData.json"
    await uiMethods.uiToJson(page)

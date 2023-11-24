@@ -10,7 +10,7 @@ module.exports = defineConfig({
   use: {
     baseURL: 'https://www.triconinfotech.com/',
     trace: 'on-first-retry',
-    headless : false
+    headless : true,
   },
   projects: [
     {
