@@ -11,7 +11,7 @@ const apiMethods = new uiCommonUtils.apiBaseClass.APIBaseClass()
 3. Validate the Page title 
 */
 test('Demo Method for Tricon Module', async ({ request, page }) => {
-    const URL = "https://postman-echo.com/post"
+    const URL = "https://9gc3i32w1h.execute-api.ap-south-1.amazonaws.com/Prod/hello/"
     const payload = "triconWebSiteHomeData.json"
    await uiMethods.uiToJson(page)
    await apiMethods.httpsPOSTCall({request,URL, payload})
