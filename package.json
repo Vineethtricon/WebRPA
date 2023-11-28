@@ -1,14 +1,8 @@
 {
-  "name": "triconinfotechproject",
-  "version": "0.0.0",
-  "description": "This is Triconn Info tech Demo UI framework",
-  "scripts": {
-    "triconDependencyInstall": " npm i && npm install -D @playwright/test && npx playwright install",
-    "automation": " npm run triconDependencyInstall && npx playwright test"
-  },
+  "name": "web-scraping",
+  "version": "0.0.1",
+  "description": "Web Scraping for API intergration",
   "dependencies": {
-    "animeshtricon": "*",
-    "monocart": "^1.1.0",
     "playwright": "^1.32.3"
   },
   "devDependencies": {
