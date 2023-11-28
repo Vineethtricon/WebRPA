@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 18
       - name: Install Dependencies
-        run: npm i
+        run: npm i && npm install playwright
       - name: Run Code
         run: node ./web-scrapping/scrape.js
   
