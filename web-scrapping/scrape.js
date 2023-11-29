@@ -26,28 +26,24 @@ let postURL = 'https://9gc3i32w1h.execute-api.ap-south-1.amazonaws.com/Prod/hell
  * @param {string} url - The URL to make the GET request to.
  */
 
-// GET request 
-async function httpGet(url) {
-  return new Promise((resolve, reject) => {
-    const protocol = new URL(url).protocol;
-    const lib = protocol === 'https:' ? https : http;
+// GET  
+async function getData(url) {
+    const browser = await playwright.chromium.launch();
+    const context = await browser.newContext();
+    const page = await context.newPage();
+  
+    await page.goto(url); // Replace with your target URL
 
-    const handleResponse = (res) => {
-      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        // Handle redirect
-        httpGet(res.headers.location).then(resolve).catch(reject);
-      } else if (res.statusCode < 200 || res.statusCode >= 300) {
-        // Handle other HTTP errors
-        reject(new Error('statusCode=' + res.statusCode));
-      } else {
-        let data = '';
-        res.on('data', (chunk) => { data += chunk; });
-        res.on('end', () => { resolve(data); });
-      }
-    };
+    // Extract data using selectors
+    const data = await page.evaluateHandle(() => document.body);
+    const dataEvalute = await page.evaluateHandle(body => body.innerHTML, data);
+    const pageJSON = await dataEvalute.jsonValue();
+    await dataEvalute.dispose();
 
-    lib.get(url, handleResponse).on('error', reject);
-  });
+    await browser.close();
+  
+  // Convert the data to JSON
+  return JSON.stringify(pageJSON, null, 2);
 }
 
 
@@ -97,25 +93,13 @@ async function httpPost(url, jsonData) {
 
 
 (async () => {
-  const browser = await playwright.chromium.launch();
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  
 
-await page.goto(getURL); // Replace with your target URL
-
-// Extract data using selectors
-const data = await page.evaluateHandle(() => document.body);
-  const dataEvalute = await page.evaluateHandle(body => body.innerHTML, data);
-  const pageJSON = await dataEvalute.jsonValue();
-  await dataEvalute.dispose();
-
-// Convert the data to JSON
-const json = JSON.stringify(pageJSON, null, 2);
+// Get Data
+const json = await getData(getURL);
 // POST API call
 const response = await httpPost(postURL, json);
-//console.log('API Response Body:', response.body);
+
 console.log('API Response Status Code:', response.statusCode);
- await browser.close();
+ 
 })();
 
