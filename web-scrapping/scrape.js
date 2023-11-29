@@ -22,8 +22,8 @@ let postURL = 'https://9gc3i32w1h.execute-api.ap-south-1.amazonaws.com/Prod/hell
  */
 
 /**
- * Function to make a GET request to a specified URL and return the response body.
- * @param {string} url - The URL to make the GET request to.
+ * Function to make GET data through scrapping from a web page to a specified URL and return the json object.
+ * @param {string} url - The URL to make the GET data from.
  */
 
 // GET  
